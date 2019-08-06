@@ -20,6 +20,7 @@ package org.apache.cordova.device;
 
 import java.util.TimeZone;
 
+import android.telephony.TelephonyManager;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -29,6 +30,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.provider.Settings;
+
+import android.content.Context;
+
 
 public class Device extends CordovaPlugin {
     public static final String TAG = "Device";
