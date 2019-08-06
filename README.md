@@ -47,6 +47,7 @@ function onDeviceReady() {
 - device.model
 - device.platform
 - device.uuid
+- device.imei
 - device.version
 - device.manufacturer
 - device.isVirtual
@@ -171,6 +172,23 @@ The UUID will be the same if app is restored from a backup or iCloud as it is sa
 ### OSX Quirk
 
 The `uuid` on OSX is generated automatically if it does not exist yet and is stored in the `standardUserDefaults` in the `CDVUUID` property.
+
+
+## device.imei
+
+Get the device's International Mobile Station Equipment Identity (IMEI).
+
+```js
+var string = device.imei;
+```
+
+### Description
+
+The details of how a IMEI is generated are determined by the device manufacturer and are specific to the device's platform or model.
+
+### Supported Platforms
+
+- Android
 
 ## device.version
 

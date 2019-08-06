@@ -35,6 +35,7 @@ public class Device extends CordovaPlugin {
 
     public static String platform;                            // Device OS
     public static String uuid;                                // Device UUID
+    public static String imei;                                // Device IMEI
 
     private static final String ANDROID_PLATFORM = "Android";
     private static final String AMAZON_PLATFORM = "amazon-fireos";
@@ -56,6 +57,7 @@ public class Device extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         Device.uuid = getUuid();
+        Device.imei = getImei();
     }
 
     /**
@@ -70,6 +72,7 @@ public class Device extends CordovaPlugin {
         if ("getDeviceInfo".equals(action)) {
             JSONObject r = new JSONObject();
             r.put("uuid", Device.uuid);
+            r.put("imei", Device.imei);
             r.put("version", this.getOSVersion());
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
@@ -111,6 +114,19 @@ public class Device extends CordovaPlugin {
     public String getUuid() {
         String uuid = Settings.Secure.getString(this.cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
         return uuid;
+    }
+
+    /**
+     * Get the device's International Mobile Station Equipment Identity (IMEI).
+     *
+     * @param context The context of the main Activity.
+     * @return
+     */
+    public String getImei() {
+        Context context = this.cordova.getActivity().getApplicationContext();
+        final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imei = mTelephony.getDeviceId();
+        return imei;
     }
 
     public String getModel() {
